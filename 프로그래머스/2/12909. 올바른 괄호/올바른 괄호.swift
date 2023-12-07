@@ -1,24 +1,26 @@
-import Foundation
-
 func solution(_ s:String) -> Bool
 {
-    var stack: [Character] = []
-    
-    if s.first == ")" {
-        return false
-    }
-    
-    for str in s {
-        if str == "(" {
-            stack.append(str)
-        } else {
-            if stack.last == "(" {
-                let _ = stack.popLast()
-            } else {
-                return false    
-            }
+    var ans:Bool = false
+
+    var openCnt: Int = 0, closeCnt: Int = 0
+
+    for ch in s {
+        switch ch {
+        case "(":
+            openCnt += 1
+        case ")":
+            closeCnt += 1
+        default:
+            break
+        }
+
+        guard openCnt >= closeCnt else {
+            break
         }
     }
 
-    return stack.isEmpty
+    ans = openCnt == closeCnt
+
+    return ans
 }
+
